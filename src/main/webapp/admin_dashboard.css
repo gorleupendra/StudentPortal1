@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/* --- Dashboard Container --- */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+.dashboard-container h1 {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* --- Card Styles --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.card-icon {
+    font-size: 3em;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+.card h2 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+}
+.card p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.action-link {
+    text-decoration: none;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.action-link:hover {
+    opacity: 0.9;
+}
+.action-link i {
+    margin-right: 8px;
+}
+.action-link.add {
+    background-color: #27ae60; /* Green */
+}
+.action-link.manage {
+    background-color: #e67e22; /* Orange */
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="toast"></div>
+    <div id="app" class="app-container">
+        <div class="login-card">
+            <div class="header">
+                <h1 class="title">Student/Admin Portal</h1>
+                <p class="subtitle">Sign in to access your dashboard</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="student-id">Enter ID or Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input id="student-id" name="emailid" type="text" required class="form-input" placeholder="Enter your ID or Email">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input id="login-password" name="password" type="password" autocomplete="current-password" required class="form-input" placeholder="Enter your password">
+                        <div class="password-toggle">
+                            <i class="fa-solid fa-eye eye-icon"></i>
+                            <i class="fa-solid fa-eye-slash eye-off-icon hidden"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="links-container">
+                    <a href="studentregistration.html" class="link">New Student? Register</a>
+                    <a href="resetpassword.html" class="link">Forgot password?</a>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Sign In</span> 
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

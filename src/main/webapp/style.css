@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff1f2;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container styling */
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 360px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Heading styling */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input fields */
+input[type=text],
+input[type=password],
+input[type=email] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Role section (optional) */
+.role {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.role label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* General span */
+span {
+    height: 100vh;
+    padding: 10px;
+}
+
+
+button,input[type=submit] {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type=submit], button:hover {
+    background: #0056b3;
+}
+
+/* Link section */
+.link {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Header, nav, main, sections */
+header {
+    background: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav {
+    background: #444;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+
+nav a:hover {
+    background: #666;
+    border-radius: 5px;
+}
+
+main {
+    padding: 20px;
+}
+
+.section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logout button */
+.logout {
+    text-align: right;
+    margin: 20px;
+}
+
+.logout a {
+    background: red;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.logout a:hover {
+    background: darkred;
+}
+
+/* Toast notification box (top-right) */
+
