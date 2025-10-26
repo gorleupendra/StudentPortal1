@@ -17,9 +17,7 @@
             --text-dark: #1f2937;
             --text-medium: #4b5563;
         }
-        html, body { height: 100%; }
-        body { font-family: Arial, sans-serif; margin: 0; display: flex; flex-direction: column; background-color: #f4f4f4; color: #333; }
-        .page-content { flex: 1; padding: 20px; }
+
         .container { 
             max-width: 900px; 
             margin: 20px auto; 

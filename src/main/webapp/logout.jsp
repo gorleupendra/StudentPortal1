@@ -4,6 +4,7 @@
     // Invalidate the user's session
     // This removes all attributes stored in the session, including "userId" and "name"
     session.invalidate();
+	String path=request.getContextPath();
 
     // Set headers to prevent caching of the page
     // This is a security measure to stop a user from clicking the browser's "back" button
@@ -13,5 +14,5 @@
     response.setDateHeader("Expires", 0); // Proxies.
 
     // Redirect the user to the login page
-    response.sendRedirect("login.html");
+    response.sendRedirect(path +"/login/login.jsp");
 %>

@@ -44,10 +44,7 @@ public class EditStudentServlet extends HttpServlet {
                     student.setAdmno(rs.getString("admno"));
                     student.setRank(rs.getString("rank"));
                     student.setAdtype(rs.getString("adtype"));
-                    
-                    // --- FIX: Uncommented this line to fetch the join date ---
                     student.setJoincate(rs.getString("joincate")); 
-                    
                     student.setVillage(rs.getString("village"));
                     student.setMandal(rs.getString("mandal"));
                     student.setDist(rs.getString("dist"));

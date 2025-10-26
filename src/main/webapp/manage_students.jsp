@@ -51,7 +51,7 @@
             --card-bg: #ffffff; --text-color: #34495e; --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --green-action: #27ae60; --red-action: #e74c3c;
         }
-        body.admin-body { font-family: 'Roboto', sans-serif; margin: 0; background-color: var(--background-color); }
+        
         .management-container { max-width: 1200px; margin: 30px auto; padding: 30px; background-color: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); }
         .management-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid var(--background-color); padding-bottom: 20px; }
         .management-header h1 { margin: 0; }

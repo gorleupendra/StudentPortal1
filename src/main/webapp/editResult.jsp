@@ -14,8 +14,7 @@
             --light-blue-bg: #f0f7ff;
             --border-color: #d1d5db;
         }
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
-        .page-content { padding: 20px; }
+       
         .container { max-width: 900px; margin: 20px auto; background: #fff; padding: 30px; border-radius: 8px; }
         .page-header {
             display: flex; justify-content: space-between; align-items: center;

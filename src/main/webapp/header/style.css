@@ -1,0 +1,267 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+/* /layout.css */
+
+/*
+  ==========================================================================
+  1. General Body, Theming & Variables
+  ==========================================================================
+*/
+:root {
+    --primary-blue: #3b82f6;
+    --primary-blue-hover: #2563eb;
+    --light-blue-bg: #f0f7ff; /* Fallback color */
+    
+    /* Dark theme colors */
+    --text-dark: #1f2937;    /* Dark gray (bg) */
+    --text-medium: #4b5563;  /* Medium gray (link hover bg, border) */
+    --text-light: #9ca3af;   /* Light gray (text) */
+    --text-lightest: #f3f4f6; /* Off-white (title text) */
+    
+    --border-color: #d1d5db;
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --footer-bg: #1a202c;
+    --footer-text: #a0aec0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+  Body & Main Layout
+*/
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-blue-bg);
+    background-image: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+/*
+  ==========================================================================
+  2. Header Styling (DARK THEME)
+  ==========================================================================
+*/
+.main-header {
+    width: 100%;
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    padding: 0 1.5rem;
+    border-bottom: 1px solid var(--text-medium);
+
+}
+
+.header-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    gap: 1rem; /* Spacing between elements */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* This flex-shrink prevents the logo from shrinking on smaller screens */
+    flex-shrink: 0; 
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+    /* NEW FILTER:
+      This turns the logo to grayscale first, then inverts it.
+      This creates a clean white logo without the "glow".
+    */
+
+}
+
+.university-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-lightest);
+}
+
+/* NEW: Wrapper for all buttons */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Space between main nav and auth nav */
+}
+
+/* NEW: Container for the "Home" style buttons */
+.header-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* NEW: Style for the "Home", "About", "Contact" buttons */
+.header-button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 1px solid var(--text-medium); /* Subtle border from image */
+    background-color: transparent;
+    color: var(--text-light); /* Light text */
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; /* Prevents text wrap */
+}
+
+/* NEW: Hover effect for the new buttons */
+.header-button:hover {
+    background-color: var(--text-medium);
+    color: #ffffff;
+    border-color: var(--text-medium);
+}
+
+/* NEW: Style for the icons inside the buttons */
+.header-button i {
+    font-size: 0.875rem; /* Make icon slightly smaller than text */
+}
+
+/* RENAMED: Container for Login/Register buttons */
+.auth-toggles {
+    display: flex;
+    gap: 0.5rem;
+    /* This adds a subtle separator line */
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--text-medium);
+}
+
+/* Styles for Login/Register buttons */
+.auth-toggles .nav-link {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; /* Prevents text wrap */
+}
+
+.auth-toggles .nav-link:hover {
+    background-color: var(--text-medium);
+    color: #ffffff;
+}
+
+.auth-toggles .nav-link.active {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/*
+  ==========================================================================
+  3. Footer Styling (DARK THEME)
+  ==========================================================================
+*/
+.main-footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 1rem 1.5rem;
+    text-align: center;
+}
+.footer-socials {
+    margin-bottom: 1rem;
+}
+.footer-socials a {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 0 0.75rem;
+    transition: color 0.2s ease-in-out;
+}
+.footer-socials a:hover {
+    color: #ffffff;
+}
+.footer-copyright {
+    font-size: 0.9rem;
+}
+
+/*
+  ==========================================================================
+  4. Layout Responsive Media Queries
+  ==========================================================================
+*/
+/* NEW: Updated breakpoint to 768px */
+@media (max-width: 768px) {
+    .header-nav {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    /* NEW: Stack all actions */
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+        align-items: stretch; /* Make button groups full-width */
+    }
+
+    /* NEW: Main buttons stack vertically */
+    .header-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* NEW: Make main buttons full width */
+    .header-button {
+        justify-content: center; /* Center text/icon */
+        padding: 0.75rem;
+    }
+    
+    /* NEW: Auth buttons full width and remove border */
+    .auth-toggles {
+        width: 100%;
+        justify-content: space-around;
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .auth-toggles .nav-link {
+        flex-grow: 1;
+        text-align: center;
+    }
+    
+    .university-name {
+        font-size: 1.1rem;
+    }
+    
+    .main-content {
+        padding: 2rem 0.5rem;
+    }
+}
+
+/* NEW: Added a breakpoint for very small screens if header gets crowded */
+@media (max-width: 400px) {
+    .logo-container {
+        /* On very small screens, just show the logo */
+        justify-content: center;
+    }
+    .university-name {
+        display: none; /* Hide uni name */
+    }
+}

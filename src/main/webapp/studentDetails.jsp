@@ -63,8 +63,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="studentHeaderFooter.css">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
-        .page-content { flex: 1; padding: 20px 0; }
         .container { max-width: 900px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .container h1 { color: #0056b3; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; margin-bottom: 25px; text-align: center; }
         .details-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }

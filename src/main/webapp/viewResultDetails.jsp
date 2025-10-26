@@ -16,8 +16,6 @@
             --edit-color: #ffc107;
             --delete-color: #dc3545;
         }
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
-        .page-content { padding: 20px; }
         .container { max-width: 900px; margin: 20px auto; background: #fff; padding: 30px; border-radius: 8px; }
         .page-header {
             display: flex;

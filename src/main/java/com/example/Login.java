@@ -23,7 +23,7 @@ public class Login extends HttpServlet {
 
         String input = request.getParameter("emailid");
         String password = request.getParameter("password");
-
+        String contextPath = request.getContextPath();
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
 
@@ -48,7 +48,9 @@ public class Login extends HttpServlet {
             if (rs.next()) {
                 // STUDENT LOGIN SUCCESS
                 handleLoginSuccess(request, rs, "student");
-                out.print("success:studentpage.jsp"); // Redirect URL for students
+                
+                
+                out.print("success:"+contextPath +"/studentpage.jsp"); // Redirect URL for students
                 return; 
             }
             
@@ -80,7 +82,8 @@ public class Login extends HttpServlet {
                     // USER/ADMIN LOGIN SUCCESS
                     String role = rs.getString("role");
                     handleLoginSuccess(request, rs, role);
-                    String redirectUrl = "admin".equalsIgnoreCase(role) ? "admin_dashboard.jsp" : "studentpage.jsp";
+                   
+                    String redirectUrl = "admin".equalsIgnoreCase(role) ? contextPath +"/admin_dashboard.jsp" : contextPath + "/studentpage.jsp";
                     out.print("success:" + redirectUrl);
                     return;
                 }

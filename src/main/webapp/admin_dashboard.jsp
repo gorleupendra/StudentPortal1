@@ -129,6 +129,10 @@
                     <i class="fas fa-university"></i>
                     <h3 style="margin-top: 15px;">Academic Control</h3>
                 </a>
+                 <a href="notifications.jsp" class="management-card">
+                    <i class="fas fa-university"></i>
+                    <h3 style="margin-top: 15px;">Manage Notifications</h3>
+                </a>
             </div>
         </div>
     </main>

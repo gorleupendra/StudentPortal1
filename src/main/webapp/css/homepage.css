@@ -1,0 +1,170 @@
+/* /home.css */
+
+/*
+  ==========================================================================
+  1. Home Page Layout (Single Column)
+  ==========================================================================
+*/
+.main-content {
+    /* Override from layout.css to give more space */
+    padding: 2rem 1rem;
+}
+
+.home-layout {
+    /* This is now a single-column, centered container */
+    width: 100%;
+    max-width: 900px; /* Max width for the notifications container */
+    margin: 0 auto; /* Center the layout */
+}
+
+.notifications-column {
+    min-width: 0; /* Prevents overflow */
+}
+
+/*
+  ==========================================================================
+  2. Notifications Column Styling
+  ==========================================================================
+*/
+
+.notifications-container {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%; /* Take full width of its column */
+    padding: 2rem 2.5rem;
+}
+
+.notifications-container h1 {
+    text-align: left; /* Aligned left for this layout */
+    color: var(--text-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligned left */
+    gap: 0.75rem;
+}
+
+.notifications-container h1 i {
+    color: var(--primary-blue);
+}
+
+.notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notification-item {
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden; /* For the badge */
+}
+
+.notification-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 1rem;
+    flex-wrap: wrap; 
+}
+
+.notification-title {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.notification-title i {
+    color: var(--text-medium);
+    font-size: 1rem;
+}
+
+.notification-date {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.notification-body p {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 1.6rem; /* Align with title text */
+}
+
+.notification-body a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding-left: 1.6rem; 
+    transition: color 0.2s ease;
+}
+
+.notification-body a i {
+    font-size: 0.8rem;
+    margin-left: 0.25rem;
+    transition: transform 0.2s ease;
+}
+
+.notification-body a:hover {
+    color: var(--primary-blue-hover);
+}
+
+.notification-body a:hover i {
+    transform: translateX(3px);
+}
+
+.new-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--error-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
+
+/*
+  ==========================================================================
+  3. Responsive for Mobile
+  ==========================================================================
+*/
+@media (max-width: 768px) {
+    .notifications-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .notifications-container h1 {
+        font-size: 1.75rem;
+    }
+    
+    .notification-body p,
+    .notification-body a {
+        padding-left: 0; /* Remove padding on mobile */
+    }
+}
+

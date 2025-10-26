@@ -2,8 +2,9 @@
 <%
     String userId1 = (String) session.getAttribute("regdno");
     String userName1 = (String) session.getAttribute("userName");
+    String contextPath=request.getContextPath();
     if (userId1 == null || userId1.isEmpty()) {
-        response.sendRedirect("login.html");
+        response.sendRedirect(contextPath +"/login/login.jsp");
         return;
     }
 

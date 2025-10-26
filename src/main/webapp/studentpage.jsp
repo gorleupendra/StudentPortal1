@@ -34,14 +34,12 @@
     <link rel="stylesheet" type="text/css" href="studentHeaderFooter.css">
     <style>
         :root { 
-            --header-bg: #ffffff; 
             --primary-blue: #0056b3;
             --light-blue-bg: #e7f3fe;
             --border-color: #ddd;
         }
-        html, body { height: 100%; }
-        body { font-family: Arial, sans-serif; margin: 0; display: flex; flex-direction: column; background-color: #f4f4f4; color: #333; }
-        .page-content { flex: 1; padding: 20px; }
+       
+       
         .container { max-width: 800px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         .container h1 { color: var(--primary-blue); }
         .info { background-color: var(--light-blue-bg); border-left: 6px solid #2196F3; padding: 15px; margin: 20px 0; font-size: 1.1em; }

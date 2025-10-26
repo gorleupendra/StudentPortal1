@@ -1,34 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); /* Use Inter font */
 
+/*
+  ==========================================================================
+  1. Variables (Should match your main site's theme)
+  ==========================================================================
+*/
 :root {
-    --header-bg: #1f2937;
+    --primary-blue: #0056b3; 
+    --primary-blue-hover: #004494; 
+    --text-dark: #1f2937;
+    --text-medium: #4b5563;
+    --text-light: #6c757d; 
+    --border-color: #dee2e6; 
+    --header-bg: #1f2937; /* Dark header background */
     --header-text: #f9fafb;
     --header-text-secondary: #d1d5db;
     --accent-red: #ef4444;
-    --primary-blue: #0056b3;
-    --light-blue-bg: #e7f3fe;
-    --border-color: #ddd;
-    --footer-bg: #1a202c;
+    --footer-bg: #1a202c; /* Dark footer background */
     --footer-text: #a0aec0;
 }
 
-/* --- FIX: General Body and Layout --- */
+/*
+  ==========================================================================
+  2. General Body and Page Content Layout
+  ==========================================================================
+*/
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif; /* Use Inter font */
     margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    /* This pushes the main content down by 70px to make space for the fixed header */
-    padding-top: 70px; 
+    background-color: #f8f9fa; /* Light page background */
+    color: var(--text-dark); /* Default text color */
+    line-height: 1.6; /* Improved line spacing */
+    /* Add padding-top to prevent content from going under fixed header */
+    padding-top: 70px; /* Adjust this value if header height changes */
 }
 
 .page-content {
-    padding: 20px;
+    /* Main content area padding */
+    padding: 20px; 
+    min-height: calc(100vh - 70px - 100px); /* Adjust footer height if needed (70px header, 100px footer estimate) */
+    box-sizing: border-box; 
 }
 
-/* --- Professional Admin Header --- */
+/*
+  ==========================================================================
+  3. Admin Header Styling
+  ==========================================================================
+*/
 .admin-header {
-    position: fixed;
+    position: fixed; /* Keep header fixed at the top */
     top: 0;
     left: 0;
     width: 100%;
@@ -37,10 +58,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 30px; /* Desktop padding */
     height: 70px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 .header-title {
@@ -51,20 +73,19 @@ body {
 
 .header-title h1 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.5em; /* Desktop font size */
     font-weight: 600;
 }
 
 .header-user-info {
     display: flex;
     align-items: center;
-    gap: 50px;
-    margin-right:50px;
+    gap: 20px; /* Reduced gap slightly */
 }
 
 .welcome-message {
     color: var(--header-text-secondary);
-    font-size: 1em;
+    font-size: 0.95em; /* Slightly smaller */
 }
 .welcome-message strong {
     color: var(--header-text);
@@ -83,6 +104,7 @@ body {
     color: var(--header-text-secondary);
     background-color: transparent;
     transition: all 0.2s ease-in-out;
+    white-space: nowrap; 
 }
 .header-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -100,12 +122,18 @@ body {
     color: white;
 }
 
-
+/*
+  ==========================================================================
+  4. Footer Styling (Matches main site theme)
+  ==========================================================================
+*/
 .main-footer {
     background-color: var(--footer-bg);
     color: var(--footer-text);
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem; /* Consistent padding */
     text-align: center;
+    box-sizing: border-box; /* Consistent padding */
+    
 }
 .footer-socials {
     margin-bottom: 1rem;
@@ -122,4 +150,54 @@ body {
 }
 .footer-copyright {
     font-size: 0.9rem;
+}
+
+
+/*
+  ==========================================================================
+  5. Responsive Adjustments 
+  ==========================================================================
+*/
+@media (max-width: 768px) {
+    body {
+        /* Adjust padding-top if header height changes on mobile */
+        /* padding-top: 60px; */ 
+    }
+    .admin-header {
+        padding: 0 15px; /* Reduce padding */
+        /* height: 60px; */ /* Optional: Reduce header height */
+    }
+
+    .header-title h1 {
+        font-size: 1.25em; /* Smaller title */
+    }
+
+    .header-user-info {
+        gap: 15px; /* Reduce gap */
+    }
+
+    .welcome-message {
+        display: none; /* Hide welcome message */
+    }
+
+    .header-button {
+        padding: 6px 10px; /* Smaller padding */
+        font-size: 0.9em;
+    }
+    .page-content {
+        padding: 15px; /* Reduce main content padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-title h1 {
+        font-size: 1.1em; /* Even smaller title */
+    }
+    
+    .header-button {
+         padding: 5px 8px; /* Further reduce padding */
+    }
+    .footer-socials a {
+        margin: 0 0.5rem; /* Reduce social icon margin */
+    }
 }
