@@ -256,7 +256,7 @@ body {
 }
 
 /* NEW: Added a breakpoint for very small screens if header gets crowded */
-@media (max-width: 400px) {
+@media (max-width: 768px) {
     .logo-container {
         /* On very small screens, just show the logo */
         justify-content: center;
