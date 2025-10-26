@@ -417,7 +417,7 @@
                         %>
                         </tbody>
                     </table>
-                </div> {/* End table-container */}
+                </div>
             </div>
 
         </div>

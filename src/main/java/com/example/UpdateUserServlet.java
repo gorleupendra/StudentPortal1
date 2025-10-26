@@ -43,12 +43,13 @@ public class UpdateUserServlet extends HttpServlet {
                 ps.executeUpdate();
             } else {
                 // Update without changing the password
-                String sql = "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?";
+                String sql = "UPDATE users SET id=?, name = ?, email = ?, role = ? WHERE id = ?";
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, name);
-                ps.setString(2, email);
-                ps.setString(3, role);
-                ps.setInt(4, userId);
+                ps.setInt(1, userId);
+                ps.setString(2, name);
+                ps.setString(3, email);
+                ps.setString(4, role);
+                ps.setInt(5, userId);
                 ps.executeUpdate();
             }
 
