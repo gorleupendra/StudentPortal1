@@ -2,113 +2,125 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); /* Use Inter Font */
 
 :root {
-    /* Dark Blue Theme Variables (Match your main site) */
-    --primary-blue: #0056b3; /* Your blue */
-    --primary-blue-hover: #004494; /* Darker blue */
-    --header-text: #ffffff; /* White text */
-    --header-text-secondary: #e0eaff; /* Light blueish-white */
-    --header-bg: #1f2937; /* Dark background from previous theme */
-    --header-link-hover-bg: rgba(255, 255, 255, 0.1);
-    --header-link-active-bg: var(--primary-blue); /* Active link uses primary blue */
-    --accent-color: var(--primary-blue); /* Use primary blue for accents */
-     --light-blue-bg: #f0f7ff; /* Fallback color */
+    /* === Refined Dark Theme Variables === */
+    --primary-blue: #3b82f6; /* Brighter blue for accents */
+    --primary-blue-hover: #2563eb; /* Darker hover blue */
+    
+    /* Header Gradient */
+    --header-bg-start: #1f2937; /* Dark Slate Gray */
+    --header-bg-end: #111827;   /* Very Dark Blue/Gray */
+    
+    --header-text: #f9fafb; /* Near white */
+    --header-text-secondary: #9ca3af; /* Lighter gray for inactive */
+    --header-border-subtle: rgba(255, 255, 255, 0.1); /* Subtle border */
+    
+    --accent-color: var(--primary-blue); /* Use primary blue for active link highlight */
+    
+    /* Other variables (keeping footer vars) */
+    --light-blue-bg: #f0f7ff; 
     --footer-bg: #1a202c;
     --footer-text: #a0aec0;
-    --danger-color: #ef4444; /* Keep red for logout */
+    --danger-color: #ef4444; 
     --danger-hover: #dc2626;
-    --page-bg: #f8f9fa; /* Light page background */
-    --text-dark: #1f2937;    /* Dark gray (bg) */
+    --page-bg: #f8f9fa; 
+    --text-dark: #1f2937;    
     --border-color: #dee2e6;
 }
 
 /* --- General Body and Layout --- */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--light-blue-bg);
-    background-image: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
-    color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    margin: 0;
+    background-color: var(--page-bg);
+    color: var(--text-dark); 
+    padding-top: 65px; /* Space for the fixed header */
+    box-sizing: border-box;
+    line-height: 1.6; 
 }
 
 .page-content {
-     flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
+    padding: 25px; /* Consistent padding */
+    min-height: calc(100vh - 65px - 100px); /* Adjust footer height if needed */
+    box-sizing: border-box;
 }
 
-/* --- Header Styles (Dark Blue Theme) --- */
+/* --- Header Styles (Attractive Dark Theme) --- */
 .main-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--header-bg); /* Use dark background */
+    /* Subtle Gradient Background */
+    background-image: linear-gradient(to right, var(--header-bg-start), var(--header-bg-end)); 
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Slightly stronger shadow for depth */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Consistent padding */
+    padding: 0 25px; /* Increased padding */
     height: 65px; 
     box-sizing: border-box;
+    border-bottom: 1px solid var(--header-border-subtle); /* Subtle bottom border */
 }
 
 /* --- Navigation Links --- */
 .header-nav {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.75rem; /* Increased gap */
 }
 .header-nav a {
     text-decoration: none;
-    color: var(--header-text-secondary); /* Use light secondary text */
-    font-weight: 500; /* Adjusted weight */
-    font-size: 1rem; /* Slightly larger */
-    padding: 0.5rem 0.25rem;
+    color: var(--header-text-secondary); 
+    font-weight: 500; 
+    font-size: 1rem; 
+    padding: 0.5rem 0.1rem; /* Adjust padding */
     transition: color 0.2s ease, border-bottom-color 0.2s ease;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent; /* Thicker underline space */
     white-space: nowrap;
 }
-/* Style for the active link */
+/* Style for the active link and hover */
 .header-nav a:hover,
 .header-nav a.active {
-    color: var(--header-text); /* White text on hover/active */
+    color: var(--header-text); 
     border-bottom-color: var(--accent-color); /* Blue underline */
 }
 .header-nav a i {
-    margin-right: 6px; /* Space between icon and text */
+    margin-right: 8px; /* Increased icon spacing */
+    vertical-align: middle; /* Better icon alignment */
 }
 
 /* --- User Info Area Styles --- */
 .user-info-area {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Consistent gap */
+    gap: 1.75rem; /* Increased gap */
 }
 
 .welcome-text {
-    color: var(--header-text-secondary); /* Light secondary text */
+    color: var(--header-text-secondary); 
     font-size: 0.9rem;
     font-weight: 500;
     white-space: nowrap;
 }
 .welcome-text strong {
-    color: var(--header-text); /* White text for name */
+    color: var(--header-text); 
     font-weight: 600;
 }
 
 .user-photo {
-    width: 45px; /* Slightly smaller */
+    width: 45px; 
     height: 45px;
-    border-radius: 50%; /* Circle */
+    border-radius: 20%; /* Circle */
     object-fit: cover;
-    object-position: top;
+    object-position: center; /* Center the image */
     cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+    border: 1px solid var(--header-border-subtle); /* Use subtle border */
+    transition: transform 0.2s ease; /* Add hover effect */
+}
+.user-photo:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
 .logout-button {
@@ -119,7 +131,7 @@ body {
     color: #fca5a5; /* Light red */
     font-weight: 500;
     padding: 8px 15px;
-    border: 1px solid rgba(239, 68, 68, 0.4); /* Light red border */
+    border: 1px solid rgba(239, 68, 68, 0.4); 
     border-radius: 6px;
     transition: all 0.2s ease-in-out;
     background-color: transparent;
@@ -128,6 +140,8 @@ body {
     background-color: var(--danger-color);
     border-color: var(--danger-color);
     color: #ffffff;
+    transform: translateY(-1px); /* Add slight lift */
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.3); /* Add subtle shadow */
 }
 
 /* --- Footer Styles (Unchanged as requested) --- */
@@ -136,7 +150,7 @@ body {
     color: var(--footer-text);
     padding: 2rem 1.5rem;
     text-align: center;
-    box-sizing: border-box; /* Add box-sizing */
+    box-sizing: border-box; 
 }
 .footer-socials {
     margin-bottom: 1rem;
@@ -156,21 +170,21 @@ body {
 }
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 1000px) { /* Adjust breakpoint if needed */
+@media (max-width: 900px) { 
     .main-header {
-        padding: 0 15px; /* Reduce padding */
+        padding: 0 15px; 
     }
     .header-nav {
-        gap: 1rem; /* Reduce nav gap */
+        gap: 1.25rem; /* Slightly reduce gap */
     }
      .header-nav a {
-         font-size: 0.95rem; /* Slightly smaller font */
+         font-size: 0.95rem; 
      }
     .user-info-area {
-        gap: 1rem; /* Reduce user info gap */
+        gap: 1.25rem; 
     }
     .welcome-text {
-        display: none; /* Hide welcome text */
+        display: none; 
     }
     .user-photo {
         width: 40px;
@@ -182,37 +196,90 @@ body {
      }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 700px) { /* Breakpoint for vertical nav */
     body {
-        padding-top: 55px; /* Adjust if header height changes */
+        padding-top: 0; /* Remove fixed padding */
     }
     .main-header {
-        height: 55px; /* Slightly smaller header */
-        padding: 0 10px;
+        position: relative; /* Change from fixed */
+        height: auto; 
+        flex-direction: column; 
+        padding: 10px 15px; 
+        align-items: stretch; 
     }
+
+    /* Vertical Navigation Styling */
     .header-nav {
-        gap: 0.75rem; /* Further reduce nav gap */
+        flex-direction: column; 
+        align-items: stretch; 
+        gap: 5px; /* Add small gap between stacked links */
+        width: 100%; 
+        margin-bottom: 15px; /* Space below nav */
+        border-bottom: 1px solid var(--header-border-subtle); 
+        padding-bottom: 15px; 
     }
      .header-nav a {
-         font-size: 0.9rem;
-         padding: 0.4rem 0.1rem; /* Adjust padding */
+         font-size: 1rem; 
+         padding: 10px 15px; /* More padding for easier tapping */
+         border-bottom: none; /* Remove underline */
+         text-align: left; /* Align text left */
+         border-radius: 6px; /* Add rounding */
+         display: flex; /* Ensure icon and text align */
+         align-items: center;
      }
-     .header-nav a i {
-         margin-right: 4px;
-     }
+      .header-nav a:hover {
+          background-color: rgba(255, 255, 255, 0.05); /* Very subtle hover */
+          color: var(--header-text);
+          border-bottom-color: transparent; 
+      }
+      .header-nav a.active {
+          background-color: var(--accent-color); /* Use blue background */
+          color: var(--header-text); 
+          border-bottom-color: transparent; 
+          font-weight: 600; /* Make active link bolder */
+      }
+      .header-nav a i {
+          margin-right: 10px; /* Consistent icon spacing */
+          width: 20px; /* Give icon fixed width */
+          text-align: center;
+      }
+      
+    /* User Info Area on Mobile */
     .user-info-area {
-        gap: 0.75rem; /* Further reduce gap */
+        gap: 1rem; 
+        justify-content: space-between; 
+        width: 100%; 
+        padding-top: 10px; /* Add padding above user info */
+    }
+    .welcome-text {
+        display: block; /* Show welcome text again */
+        font-size: 0.9rem;
+        flex-grow: 1; 
+        text-align: left;
     }
     .user-photo {
-        width: 35px;
-        height: 35px;
+        width: 40px; /* Keep size consistent with 900px breakpoint */
+        height: 40px;
     }
     .logout-button {
-         padding: 5px 8px; /* Smaller button */
-         font-size: 0.85rem;
+         padding: 6px 10px; 
+         font-size: 0.9rem;
          gap: 5px;
      }
-     /* Optionally hide icons on very small screens */
-     /* .logout-button i { display: none; } */
-     .page-content { padding: 15px; } /* Reduce content padding */
+     .page-content { padding: 15px; } 
 }
+
+@media (max-width: 400px) {
+     .welcome-text {
+         font-size: 0.8rem; /* Smaller text */
+     }
+      .user-photo {
+         width: 35px;
+         height: 35px;
+     }
+      .logout-button {
+         padding: 5px 8px; 
+         font-size: 0.85rem;
+     }
+}
+
