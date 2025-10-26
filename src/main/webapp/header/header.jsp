@@ -4,7 +4,7 @@
         <%-- Logo --%>
         <div class="logo-container">
             <%-- UPDATED THIS LINE --%>
-<img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Andhra_University_logo.png" alt="University Logo" class="logo-img">            <span class="university-name">Andhra University College of Engineering(Msc Computer Science)</span>
+<img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Andhra_University_logo.png" alt="University Logo" class="logo-img"><span class="university-name">Andhra University (MSc Computer Science)</span>
         </div>
 
         <%-- Wrapper for all header buttons/actions --%>

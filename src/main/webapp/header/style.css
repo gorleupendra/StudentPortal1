@@ -177,7 +177,7 @@ body {
   ==========================================================================
 */
 /* NEW: Updated breakpoint to 768px */
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
     .header-nav {
         flex-direction: column;
         height: auto;
