@@ -156,7 +156,7 @@ body {
 }
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 900px) { /* Adjust breakpoint if needed */
+@media (max-width: 1000px) { /* Adjust breakpoint if needed */
     .main-header {
         padding: 0 15px; /* Reduce padding */
     }
@@ -182,7 +182,7 @@ body {
      }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     body {
         padding-top: 55px; /* Adjust if header height changes */
     }
