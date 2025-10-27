@@ -76,7 +76,7 @@
 
                 // Update timer display immediately
                 // *** FIX: Escaped the $ for JSP ***
-                otpTimerDisplay.textContent = `OTP expires in \${formatTime(timeLeft)}`; 
+                otpTimerDisplay.textContent = `OTP expires in ${formatTime(timeLeft)}`; 
                 otpTimerDisplay.className = 'otp-timer-display'; // Reset style
 
                 clearInterval(otpValidityTimerInterval); // Clear previous interval
@@ -88,7 +88,7 @@
                     if (timeLeft >= 0) {
                          // Update the display element with MM:SS format
                          // *** FIX: Escaped the $ for JSP ***
-                         otpTimerDisplay.textContent = `OTP expires in \${formatTime(timeLeft)}`;
+                         otpTimerDisplay.textContent = `OTP expires in ${formatTime(timeLeft)}`;
                     }
 
                     // When time reaches 0 or less
@@ -130,7 +130,7 @@
                 const basePath = form.action.substring(0, form.action.lastIndexOf('/')); 
                 const verifyEmailUrl = `${basePath}/verifyEmail`; 
                 
-                fetch('verifyEmail', { // Corrected fetch URL usage
+                fetch(verifyEmailUrl, { // Corrected fetch URL usage
                     method: 'POST',
                     body: dataToSend
                 })
