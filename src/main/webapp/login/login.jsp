@@ -52,7 +52,7 @@
                     <div class="links-container">
                         <%-- This link is now also in the header, but good to keep here too --%>
                         <a href="${pageContext.request.contextPath}/studentregistration.jsp" class="link">New Student? Register</a>
-                        <a href="${pageContext.request.contextPath}/resetpassword.html" class="link">Forgot password?</a>
+                        <a href="${pageContext.request.contextPath}/resetpassword.jsp" class="link">Forgot password?</a>
                     </div>
                     <div class="button-group">
                         <button type="submit" class="submit-btn">

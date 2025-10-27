@@ -75,7 +75,7 @@
     
     <%-- Link to the STUDENT header/footer CSS (assuming it exists) --%>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/studentHeaderFooter.css">
-    	
+    		
     <style>
         /* Inherit variables from studentHeaderFooter.css if defined */
         :root { 
