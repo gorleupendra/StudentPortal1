@@ -22,11 +22,11 @@
         rs.close(); // Close previous ResultSet
         
         // Get user count (adjust table name if needed)
-        // rs = stmt.executeQuery("SELECT COUNT(*) FROM users"); 
-        // if (rs.next()) userCount = rs.getInt(1);
-        // rs.close(); // Close previous ResultSet
+         rs = stmt.executeQuery("SELECT COUNT(*) FROM users"); 
+         if (rs.next()) userCount = rs.getInt(1);
+         rs.close(); // Close previous ResultSet
         // Using placeholder for now if 'users' table doesn't exist yet
-        userCount = 0; 
+         
         
         // Get records count
         rs = stmt.executeQuery("SELECT COUNT(*) FROM student_records");
@@ -206,7 +206,7 @@
                 
                 <a href="userManagement.jsp" class="management-card">
                     <i class="fas fa-user-shield"></i>
-                    <p class="card-count"><%//= userCount %></p> 
+                    <p class="card-count"><%= userCount %></p> 
                     <h3>User Management</h3>
                 </a> 
             

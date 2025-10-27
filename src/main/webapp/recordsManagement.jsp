@@ -330,7 +330,7 @@
                         %>
                     </tbody>
                 </table>
-            </div> {/* End table-container */}
+            </div>
 		</div>
 	</main>
 

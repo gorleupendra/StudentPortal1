@@ -12,18 +12,17 @@ public class DbConnection {
             
             // --- YOUR CORRECT RENDER DETAILS ---
             Class.forName("org.postgresql.Driver");
-
-            String host = "dpg-d3mb0l0gjchc73d0fmbg-a.oregon-postgres.render.com";
-            String dbName = "student_portal_db_4mg7";
-            String user = "upendra_gorle";	
-            String pass = "q0uqYFBI13nMoKKTMTW1xIVciq4KHKe4"; 
+            String host = "db.rjccjgjlfzbzitxyoycr.supabase.co"; // Replace if your Session Pooler host is different
+            String dbName = "postgres";      // Supabase default database name
+            String user = "postgres";        // Supabase default user
+            String pass = "Gupendra@2002"; // *** REPLACE THIS WITH YOUR ACTUAL SUPABASE DB PASSWORD ***
             // The JDBC URL format requires SSL for Render
             String url = "jdbc:postgresql://" + host + "/" + dbName + "?sslmode=require";
             
             con = DriverManager.getConnection(url, user, pass);
             
         } catch (ClassNotFoundException | SQLException e) {
-        	System.out.println("con is not connecteed");
+        	System.out.println("Database connection is Failed");
             e.printStackTrace();
         }
         return con;

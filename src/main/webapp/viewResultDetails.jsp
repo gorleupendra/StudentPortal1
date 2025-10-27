@@ -292,7 +292,7 @@
                     %>
                     </tbody>
                 </table>
-            </div> {/* End table-container */}
+            </div>
             <%
                         } else { // If rsResult has no next()
             %>
