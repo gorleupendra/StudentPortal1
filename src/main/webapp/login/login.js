@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new URLSearchParams();
             formData.append('emailid', emailInput.value);
             formData.append('password', passwordInput.value);
+           
             
             showToast('Validating....', true);
             
