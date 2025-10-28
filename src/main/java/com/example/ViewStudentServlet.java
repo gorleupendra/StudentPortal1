@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.StringJoiner;
 
 import jakarta.servlet.RequestDispatcher;
@@ -23,7 +23,7 @@ public class ViewStudentServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String regdNo = request.getParameter("regdno");
-
+        //String contextPath=request.getContextPath();
         // Use try-with-resources for automatic closing of all resources
         try (Connection con = DbConnection.getConne();
              PreparedStatement ps = con.prepareStatement("SELECT * FROM students WHERE regd_no = ?")) {

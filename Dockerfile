@@ -25,7 +25,7 @@ FROM tomcat:10.1-jdk17-temurin
 # Remove default webapps
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy your custom server.xml (as you requested)
+# Copy your custom server.xml 
 COPY server.xml /usr/local/tomcat/conf/server.xml
 
 # Copy the .war file from the 'builder' stage

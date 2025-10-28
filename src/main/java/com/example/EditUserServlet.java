@@ -15,10 +15,10 @@ import java.sql.ResultSet;
 @WebServlet("/editUser")
 public class EditUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
+    	String contextPath=request.getContextPath();
         String idParam = request.getParameter("id");
         
         try (Connection con = DbConnection.getConne()) {

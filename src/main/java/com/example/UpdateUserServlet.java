@@ -16,7 +16,7 @@ public class UpdateUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
+        String contextPath=request.getContextPath();
         String idParam = request.getParameter("id");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -33,13 +33,14 @@ public class UpdateUserServlet extends HttpServlet {
             if (password != null && !password.isEmpty()) {
                 // Update with new password
                 String hashedPassword = HashPassword.hashPassword(password);
-                String sql = "UPDATE users SET name = ?, email = ?, role = ?, password = ? WHERE id = ?";
+                String sql = "UPDATE users SET id=?, name = ?, email = ?, role = ?, password = ? WHERE id = ?";
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, name);
-                ps.setString(2, email);
-                ps.setString(3, role);
-                ps.setString(4, hashedPassword);
-                ps.setInt(5, userId);
+                ps.setInt(1, userId);
+                ps.setString(2, name);
+                ps.setString(3, email);
+                ps.setString(4, role);
+                ps.setString(5, hashedPassword);
+                ps.setInt(6, userId);
                 ps.executeUpdate();
             } else {
                 // Update without changing the password
@@ -61,6 +62,6 @@ public class UpdateUserServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("userManagement.jsp?status=" + status + "&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
+        response.sendRedirect(contextPath+"userManagement.jsp?status=" + status + "&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
     }
 }

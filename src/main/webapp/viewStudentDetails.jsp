@@ -6,25 +6,22 @@
 
 <%
     // --- Start of Server-Side Data Fetching ---
-    // This is more secure and robust than passing all data in the URL.
-    
-    // Get the ID from the request
-    String regdId = request.getParameter("id");
-
+    String regdId = request.getParameter("regdno");
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     try {
         con = DbConnection.getConne();
-        // Updated query to fetch all details for one student
+        if (con == null) {
+             throw new SQLException("Database connection failed.");
+        }
         String sql = "SELECT *, photo IS NOT NULL as has_photo, sign IS NOT NULL as has_sign FROM students WHERE regd_no = ?";
         ps = con.prepareStatement(sql);
         ps.setString(1, regdId);
         rs = ps.executeQuery();
 
         if (rs.next()) {
-            // Set attributes for the JSTL tags to use
             request.setAttribute("regd_no", rs.getString("regd_no"));
             request.setAttribute("name", rs.getString("name"));
             request.setAttribute("fathername", rs.getString("fathername"));
@@ -34,35 +31,37 @@
             request.setAttribute("admno", rs.getString("admno"));
             request.setAttribute("rank", rs.getInt("rank"));
             request.setAttribute("adtype", rs.getString("adtype"));
-            request.setAttribute("studentClass", rs.getString("class")); // 'class' is a reserved word
+            request.setAttribute("studentClass", rs.getString("class"));
             request.setAttribute("dept", rs.getString("dept"));
-            request.setAttribute("joincate", rs.getString("joincate")); // Changed from joindate
+            request.setAttribute("joincate", rs.getString("joincate"));
             request.setAttribute("dob", rs.getDate("dob"));
             request.setAttribute("gender", rs.getString("gender"));
-            
-            // Combine address parts
-            String address = String.join(", ", 
-                rs.getString("village"), 
-                rs.getString("mandal"), 
-                rs.getString("dist"), 
-                rs.getString("pincode"));
-            request.setAttribute("address", address);
+
+            // Combine address parts safely, handling nulls
+            List<String> addressParts = new ArrayList<>();
+            String village = rs.getString("village");
+            String mandal = rs.getString("mandal");
+            String dist = rs.getString("dist");
+            String pincode = rs.getString("pincode");
+            if (village != null && !village.isEmpty()) addressParts.add(village);
+            if (mandal != null && !mandal.isEmpty()) addressParts.add(mandal);
+            if (dist != null && !dist.isEmpty()) addressParts.add(dist);
+            if (pincode != null && !pincode.isEmpty()) addressParts.add(pincode);
+            request.setAttribute("address", String.join(", ", addressParts));
 
             request.setAttribute("hasPhoto", rs.getBoolean("has_photo"));
             request.setAttribute("hasSign", rs.getBoolean("has_sign"));
-            
         } else {
-            // No student found, set a flag
             request.setAttribute("noStudentFound", true);
         }
-
     } catch (Exception e) {
         e.printStackTrace();
         request.setAttribute("dbError", e.getMessage());
     } finally {
-        if (rs != null) try { rs.close(); } catch (SQLException e) {}
-        if (ps != null) try { ps.close(); } catch (SQLException e) {}
-        if (con != null) try { con.close(); } catch (SQLException e) {}
+        // Safe closing of resources
+        try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+        try { if (ps != null) ps.close(); } catch (SQLException e) { e.printStackTrace(); }
+        try { if (con != null) con.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
     // --- End of Server-Side Data Fetching ---
 %>
@@ -71,20 +70,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- ADDED: Viewport for mobile responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details</title>
-    
-    <!-- Font Awesome for icons -->
+    <title>Student Details - ${regd_no}</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- ADDED: Tailwind CSS for all styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Your existing header/footer CSS -->
     <link rel="stylesheet" href="adminHeaderFooter.css">
-    
-    <style>
+
+   <style>
         :root { 
             --primary-blue: #0056b3;
             --border-color: #e5e7eb;
@@ -178,140 +171,238 @@
         .btn:hover {
             background-color: #d1d5db;
         }
+        :root {
+            --primary-blue: #0056b3;
+            --border-color: #e5e7eb; /* Tailwind gray-200 */
+            --text-label: #374151;   /* Tailwind gray-700 */
+            --text-data: #4b5563;    /* Tailwind gray-600 */
+        }
+        body {
+             background-color: #f3f4f6; /* Tailwind gray-100 */
+        }
+        /* Style for the back button - using Tailwind is preferred, but this works too */
+        .btn-back {
+            padding: 8px 15px;
+            border-radius: 6px;
+            color: var(--text-label);
+            font-weight: 600;
+            text-decoration: none;
+            background-color: #e5e7eb; /* Tailwind gray-200 */
+            transition: background-color 0.2s;
+            border: 1px solid var(--border-color);
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+        }
+        .btn-back:hover {
+            background-color: #d1d5db; /* Tailwind gray-300 */
+        }
+        .btn-back i {
+             margin-right: 0.5rem; /* Tailwind mr-2 */
+        }
+        /* Specific styles for the dt/dd structure if needed */
+        .profile-data dt {
+             /* Tailwind class: text-sm font-medium text-gray-600 */
+             font-size: 0.875rem;
+             font-weight: 500;
+             color: var(--text-label); /* Adjusted to gray-700 equivalent */
+        }
+         .profile-data dd {
+              /* Tailwind class: text-base text-gray-900 mt-1 */
+              font-size: 1rem;
+              color: var(--text-data); /* Adjusted to gray-600 equivalent */
+              margin-top: 0.25rem;
+         }
+         /* Highlight style */
+         .profile-data .highlight dd {
+              /* Tailwind classes: font-bold text-indigo-700 */
+              font-weight: 700;
+              color: #4338ca; /* Tailwind indigo-700 */
+         }
+         /* Add bottom border to each item */
+         .profile-data > div {
+             /* Tailwind classes: py-3 border-b border-gray-100 */
+             padding-top: 0.75rem;
+             padding-bottom: 0.75rem;
+             border-bottom: 1px solid #f3f4f6; /* Tailwind gray-100 */
+         }
+          /* Address spanning two columns needs slightly different border handling in grid */
+          .profile-data > .address-item {
+              /* Tailwind classes: md:col-span-2 */
+              grid-column: span 2 / span 2;
+          }
+           /* Remove bottom border from the very last item */
+           .profile-data > div:last-child {
+                border-bottom: none;
+           }
+            @media (min-width: 768px) {
+                /* On medium screens and up (md: grid), remove border from second-to-last if last is full span */
+                 .profile-data > .address-item:last-child {
+                     border-bottom: none;
+                 }
+                 .profile-data > div:nth-last-child(2):not(.address-item) {
+                    /* Only remove border if the last item spans columns */
+                     border-bottom: none;
+                 }
+                 .profile-data > div:nth-last-child(2).address-item ~ div {
+                     /* If address is second to last, remove border from actual last */
+                      border-bottom: none;
+                 }
+            }
     </style>
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
     <%@ include file="admin_header.jsp" %>
-    
+
     <main class="page-content flex-grow p-4 sm:p-8">
-        <!-- 
-          MODIFIED: Container is now responsive
-          - w-full: Full width on mobile
-          - max-w-4xl: Max width on desktop
-          - mx-auto: Centered on desktop
-        -->
         <div class="container w-full max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md">
 
-            <!-- MODIFIED: Page header with responsive padding and font size -->
-            <div class="page-header flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-200 pb-4 mb-6">
-                <h2 class="profile-title text-2xl sm:text-3xl font-bold text-gray-800">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-200 pb-4 mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">
                     Student Profile
                 </h2>
-                <a href="studentManagement.jsp" class="btn w-full sm:w-auto mt-4 sm:mt-0 inline-block text-center px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-all">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to List
+                <%-- Using Tailwind for the back button now --%>
+                <a href="studentManagement.jsp" class="btn-back mt-4 sm:mt-0">
+                    <i class="fas fa-arrow-left"></i>Back to List
                 </a>
             </div>
 
-            <!-- Error/Not Found Handling -->
             <c:if test="${not empty noStudentFound}">
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 p-4" role="alert">
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
                     <p class="font-bold">Not Found</p>
-                    <p>No student was found with the provided Registration ID: ${param.id}</p>
+                    <p>No student was found with the provided Registration ID: <c:out value="${param.id}"/></p>
                 </div>
             </c:if>
             <c:if test="${not empty dbError}">
-                <div class="bg-red-50 border-l-4 border-red-400 text-red-700 p-4" role="alert">
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
                     <p class="font-bold">Database Error</p>
-                    <p>${dbError}</p>
+                    <p><c:out value="${dbError}"/></p>
                 </div>
             </c:if>
 
-            <!-- 
-              MODIFIED: Replaced <table> with a responsive <div> grid
-              - Stacks on mobile (1 column)
-              - Becomes 2 columns on desktop (md:grid-cols-2)
-            -->
             <c:if test="${empty noStudentFound and empty dbError}">
-                <div class="profile-data grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-                    
-                    <!-- Helper component for data pairs -->
-                    <jsp:template prefix="ui" data_label="Registration Number:" data_value="${regd_no}" />
-                    <jsp:template prefix="ui" data_label="Name:" data_value="${name}" data_highlight="true" />
-                    <jsp:template prefix="ui" data_label="Father's Name:" data_value="${fathername}" />
-                    <jsp:template prefix="ui" data_label="Mother's Name:" data_value="${mothername}" />
-                    <jsp:template prefix="ui" data_label="Email:" data_value="${email}" />
-                    <jsp:template prefix="ui" data_label="Phone Number:" data_value="${phone}" />
-                    <jsp:template prefix="ui" data_label="Admission No:" data_value="${admno}" />
-                    <jsp:template prefix="ui" data_label="Rank:" data_value="${rank}" />
-                    <jsp:template prefix="ui" data_label="Admission Type:" data_value="${adtype}" />
-                    <jsp:template prefix="ui" data_label="Class:" data_value="${studentClass}" />
-                    <jsp:template prefix="ui" data_label="Department:" data_value="${dept}" />
-                    <jsp:template prefix="ui" data_label="Joining Category:" data_value="${joincate}" />
-                    
-                    <div class="py-3 border-b border-gray-100">
-                        <dt class="text-sm font-medium text-gray-600">Date of Birth:</dt>
-                        <dd class="text-base text-gray-900 mt-1">
-                            <c:if test="${not empty dob}">
-                                <fmt:formatDate value="${dob}" pattern="dd-MM-yyyy"/>
-                            </c:if>
-                            <c:if test="${empty dob}">N/A</c:if>
+                <%-- FIXED: Changed wrapping div to dl and added class --%>
+                <dl class="profile-data grid grid-cols-1 md:grid-cols-2 gap-x-8"> <%-- Removed gap-y, handled by item padding/border --%>
+
+                    <%-- Reusable structure using div/dt/dd --%>
+                    <div>
+                        <dt>Registration Number:</dt>
+                        <dd><c:out value="${regd_no}" default="N/A"/></dd>
+                    </div>
+
+                    <div class="highlight"> <%-- Added highlight class --%>
+                        <dt>Name:</dt>
+                        <dd><c:out value="${name}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Father's Name:</dt>
+                        <dd><c:out value="${fathername}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Mother's Name:</dt>
+                        <dd><c:out value="${mothername}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Email:</dt>
+                        <dd><c:out value="${email}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Phone Number:</dt>
+                        <dd><c:out value="${phone}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Admission No:</dt>
+                        <dd><c:out value="${admno}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Rank:</dt>
+                        <dd><c:out value="${rank}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Admission Type:</dt>
+                        <dd><c:out value="${adtype}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Class:</dt>
+                        <dd><c:out value="${studentClass}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Department:</dt>
+                        <dd><c:out value="${dept}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Joining Category:</dt>
+                        <dd><c:out value="${joincate}" default="N/A"/></dd>
+                    </div>
+
+                    <div>
+                        <dt>Date of Birth:</dt>
+                        <dd>
+                            <c:choose>
+                                <c:when test="${not empty dob}">
+                                    <fmt:formatDate value="${dob}" pattern="dd-MM-yyyy"/>
+                                </c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                             </c:choose>
                         </dd>
                     </div>
 
-                    <jsp:template prefix="ui" data_label="Gender:" data_value="${gender}" />
-                    
-                    <!-- Full-width address field -->
-                    <div class="md:col-span-2 py-3 border-b border-gray-100">
-                        <dt class="text-sm font-medium text-gray-600">Address:</dt>
-                        <dd class="text-base text-gray-900 mt-1">
-                            <c:if test="${not empty address}">${address}</c:if>
-                            <c:if test="${empty address}">N/A</c:if>
-                        </dd>
+                    <div>
+                        <dt>Gender:</dt>
+                        <dd><c:out value="${gender}" default="N/A"/></dd>
                     </div>
-                </div>
-            
-                <!-- 
-                  MODIFIED: Media container
-                  - Stacks on mobile (flex-col)
-                  - Becomes a row on desktop (sm:flex-row)
-                -->
-                <div class="media-container flex flex-col sm:flex-row justify-around items-center mt-8 pt-6 border-t border-gray-200 gap-6">
-                    <div class="media-item text-center">
+
+                    <%-- Full-width address field --%>
+                    <div class="address-item"> <%-- Added address-item class --%>
+                        <dt>Address:</dt>
+                        <dd><c:out value="${address}" default="N/A"/></dd>
+                    </div>
+                </dl> <%-- FIXED: Closing dl tag --%>
+
+                <%-- Media container for Photo and Signature --%>
+                <div class="flex flex-col sm:flex-row justify-around items-center mt-8 pt-6 border-t border-gray-200 gap-6">
+                    <div class="text-center">
                         <p class="text-base font-medium text-gray-700 mb-2">Student Photo</p>
-                        <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
+                        <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 overflow-hidden">
                             <c:choose>
                                 <c:when test="${hasPhoto}">
-                                    <img src="getphoto.jsp?id=${regd_no}" alt="Student Photo" class="w-full h-full object-contain rounded-lg">
+                                    <img src="getphoto.jsp?id=${regd_no}" alt="Student Photo" class="w-full h-full object-contain">
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="text-gray-500 italic">No Photo</span>
+                                    <span class="text-gray-500 italic text-sm">No Photo Available</span>
                                 </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
-                    <div class="media-item text-center">
+                    <div class="text-center">
                         <p class="text-base font-medium text-gray-700 mb-2">Student Signature</p>
-                        <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
+                        <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 overflow-hidden">
                             <c:choose>
                                 <c:when test="${hasSign}">
-                                    <img src="getSign.jsp?id=${regd_no}" alt="Student Signature" class="w-full h-full object-contain rounded-lg">
+                                    <img src="getSign.jsp?id=${regd_no}" alt="Student Signature" class="w-full h-full object-contain">
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="text-gray-500 italic">No Signature</span>
+                                    <span class="text-gray-500 italic text-sm">No Signature Available</span>
                                 </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
                 </div>
             </c:if>
-            
+
         </div>
     </main>
-    
+
     <%@ include file="footer.jsp" %>
 </body>
 </html>
-
-<!-- 
-  This is a reusable template for displaying data.
-  It's defined here and used above with <jsp:template>
--->
-<jsp:template prefix="ui" data_label="" data_value="" data_highlight="false">
-    <div class="py-3 border-b border-gray-100">
-        <dt class="text-sm font-medium text-gray-600">${data_label}</dt>
-        <dd class="text-base mt-1 ${data_highlight ? 'font-bold text-indigo-700' : 'text-gray-900'}">
-            <c:out value="${data_value}" default="N/A"/>
-        </dd>
-    </div>
-</jsp:template>

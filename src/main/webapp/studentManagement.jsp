@@ -358,9 +358,9 @@
                             <td><%= phone %></td>
                             <td><%= dept %></td>
                             <td><%= studentClass %></td>
-                            <td class="actions"><a href="viewStudent?regdno=<%= regdNo %>" class="view-link" title="View Details"><i class="fas fa-eye"></i></a></td>
-                            <td class="actions"><a href="editStudent?regdno=<%= regdNo %>" class="edit-link" title="Edit"><i class="fas fa-edit"></i></a></td>
-                            <td class="actions"><a href="deleteStudent?regdno=<%= regdNo %>" class="delete-link" title="Delete" onclick="return confirm('Are you sure you want to delete student <%= regdNo %>?');"><i class="fas fa-trash"></i></a></td>
+                            <td class="actions"><a href="${pageContext.request.contextPath}/viewStudent?regdno=<%= regdNo %>" class="view-link" title="View Details"><i class="fas fa-eye"></i></a></td>
+                            <td class="actions"><a href="${pageContext.request.contextPath}/editStudent?regdno=<%= regdNo %>" class="edit-link" title="Edit"><i class="fas fa-edit"></i></a></td>
+                            <td class="actions"><a href="${pageContext.request.contextPath}/deleteStudent?regdno=<%= regdNo %>" class="delete-link" title="Delete" onclick="return confirm('Are you sure you want to delete student <%= regdNo %>?');"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     <%
                             }
@@ -390,7 +390,6 @@
         </div>
     </main>
 
-    <%-- Assuming footer.jsp is at the root or adjust path --%>
     <%@ include file="/footer.jsp" %> 
 </body>
 </html>
