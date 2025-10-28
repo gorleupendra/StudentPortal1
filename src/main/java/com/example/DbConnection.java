@@ -14,7 +14,7 @@ public class DbConnection {
             // --- Supabase Connection Details ---
             String host = System.getenv("SUPABASE_DB_HOST"); // Read host from environment variable
             String dbName = "postgres";                      // Supabase default database name
-            String user = "postgres";                        // Supabase default user
+            String user = "postgres.rjccjgjlfzbzitxyoycr";                        // Supabase default user
 
             // Read password securely from environment variable
             String pass = System.getenv("SUPABASE_DB_PASSWORD");
