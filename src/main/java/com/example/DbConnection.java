@@ -48,6 +48,7 @@ public class DbConnection {
             System.err.println("Database connection failed: An unexpected error occurred.");
             e.printStackTrace();
         }
+        if(con==null) {System.out.println("Connection is null");}
         return con;
     }
 
