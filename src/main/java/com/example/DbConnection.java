@@ -8,48 +8,37 @@ public class DbConnection {
     public static Connection getConne() {
         Connection con = null;
         try {
-            // Load the PostgreSQL driver (only needs to be done once)
+            // Load the PostgreSQL driver
             Class.forName("org.postgresql.Driver");
 
-            // --- Supabase Connection Details ---
-            String host = System.getenv("SUPABASE_DB_HOST"); // Read host from environment variable
-            String dbName = "postgres";                      // Supabase default database name
-            String user = "postgres.rjccjgjlfzbzitxyoycr";                        // Supabase default user
+            // --- Hardcoded Render Connection Details (FOR TESTING ONLY) ---
+            String host =System.getenv("RENDER-DB-HOST"); // Render Internal Hostname
+            String dbName = "student_portal_db_4mg7";     // Render DB Name
+            String user = "upendra_gorle";             // Render DB User
+            String pass =System.getenv("RENDER_DB_PASSWORD"); // Render DB Password (REMOVE BEFORE COMMIT/DEPLOY)
 
-            // Read password securely from environment variable
-            String pass = System.getenv("SUPABASE_DB_PASSWORD");
+            // --- Input Validation (Less critical with hardcoded values, but good practice) ---
+            // (Removed checks for null/empty as they are hardcoded now)
 
-            // --- Input Validation ---
-            if (host == null || host.trim().isEmpty()) {
-                System.err.println("Database connection failed: SUPABASE_DB_HOST environment variable not set or empty.");
-                return null; // Exit if host is missing
-            }
-            if (pass == null || pass.trim().isEmpty()) {
-                System.err.println("Database connection failed: SUPABASE_DB_PASSWORD environment variable not set or empty.");
-                return null; // Exit if password is missing
-            }
-
-            // Construct the JDBC URL (ensure SSL mode is required for Supabase/Render)
-            // Using port 5432 for Session Pooler (IPv4 compatible for Render)
+            // --- Construct the JDBC URL ---
+            // NOTE: Render internal connections might NOT require SSL.
+            // If you get SSL errors, try removing "?sslmode=require" when running ON Render.
+            // External connections (like from your local machine) DO require SSL.
             String url = "jdbc:postgresql://" + host + ":5432/" + dbName + "?sslmode=require";
-            // System.out.println("Attempting to connect to: " + url + " with user: " + user); // Debugging line (optional)
-
             // Establish the connection
             con = DriverManager.getConnection(url, user, pass);
-            // System.out.println("Database connection successful!"); // Success message (optional)
 
         } catch (ClassNotFoundException e) {
             System.err.println("Database connection failed: PostgreSQL Driver not found.");
             e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("Database connection failed: SQL Exception.");
-            e.printStackTrace();
+            e.printStackTrace(); // This will show details like "Connection refused", "Authentication failed", "SSL required" etc.
         } catch (Exception e) { // Catch any other unexpected errors
             System.err.println("Database connection failed: An unexpected error occurred.");
             e.printStackTrace();
         }
-        if(con==null) {System.out.println("Connection is null");}
+        if(con==null) {System.err.println("Connection object is null after attempting connection.");} // Changed to System.err
         return con;
     }
-
 }
