@@ -12,7 +12,7 @@ public class KeepAlive {
         // 1. Read Environment Variables
         String host = System.getenv("SUPABASE_DB_HOST");
         String pass = System.getenv("SUPABASE_DB_PASSWORD");
-        String user ="postgres.rjccjgjlfzbzitxyoycr"; // The user from your screenshot
+        String user ="postgres.rjccjgjlfzbzitxyoycr"; // The user from your screensho
 
         // 2. Validate Variables
         if (host == null || pass == null || user == null || 
