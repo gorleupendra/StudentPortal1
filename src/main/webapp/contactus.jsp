@@ -14,7 +14,7 @@
     
     <%-- Main layout CSS (Header/Footer) --%>
     <%-- This file provides all the color variables like --primary-blue --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> 
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> --%>
     
     <%-- Page-Specific CSS for Contact Form --%>
     <style>

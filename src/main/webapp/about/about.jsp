@@ -14,7 +14,7 @@
     
     <%-- Stylesheets --%>
     <%-- Main layout from header folder --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> 
+ <%--   <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> --%>
     <%-- Specific styles for this page --%>
     <link rel="stylesheet" href="about.css">
     

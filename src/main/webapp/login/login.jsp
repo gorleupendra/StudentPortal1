@@ -17,7 +17,7 @@
       !! UPDATE THIS PART !!
       Link both stylesheets, layout first.
     --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css">
+   <%--   --%>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>

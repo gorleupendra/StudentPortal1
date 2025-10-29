@@ -18,7 +18,7 @@
     
     <%-- Stylesheets --%>
     <%-- Main layout CSS (Header/Footer) --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> 
+   <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> --%>
     
     <%-- Homepage-specific CSS is now included below --%>
     <style>
