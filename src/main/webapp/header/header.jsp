@@ -41,7 +41,7 @@
         </div>
     </nav>
 </header>
-
+<div id="toast"></div>
 <%-- Simple JavaScript for Mobile Menu Toggle --%>
 <script>
     const menuToggle = document.querySelector('.mobile-menu-toggle');

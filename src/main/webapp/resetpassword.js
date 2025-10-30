@@ -230,8 +230,8 @@
                             generateOtpBtn.disabled = false; 
                             otpBtnText.textContent = 'Generate OTP';
                              setTimeout(() => { 
-                                 window.location.href = '${pageContext.request.contextPath}/login/login.jsp'; 
-                             }, 2000);
+                                 window.location.href = 'login/login.jsp'; 
+                             }, 5000);
                         }
                     })
                     .catch(error => {

@@ -7,7 +7,7 @@
   ==========================================================================
 */
 
-/* Note: All CSS variables (like --primary-blue) are inherited 
+/* Note: All CSS variables (like --primary-blue) are inherited
    from layout.css, so they don't need to be repeated here.
 */
 
@@ -94,7 +94,7 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-/* Password-specific styles */
+/* Password-specific styles (MERGED AND CLEANED) */
 .password-toggle {
     position: absolute;
     right: 1rem;
@@ -102,6 +102,18 @@
     transform: translateY(-50%);
     color: var(--text-light);
     cursor: pointer;
+    padding: 0.25rem; /* Makes the click area slightly larger */
+    transition: color 0.2s ease; /* Smooth color transition on hover */
+}
+
+.password-toggle:hover {
+    color: var(--text-medium); /* Slightly darker color on hover */
+}
+
+.password-toggle i {
+    font-size: 1.1em; /* Adjust icon size if necessary */
+    display: inline-block; /* Helps prevent layout shifts */
+    vertical-align: middle;
 }
 
 .validation-container {
@@ -160,7 +172,7 @@
     background-color: var(--primary-blue-hover);
 }
 
-/* Utility */
+/* Utility (Single definition) */
 .hidden {
     display: none;
 }

@@ -1,4 +1,3 @@
-<%-- /login.jsp --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +16,23 @@
       !! UPDATE THIS PART !!
       Link both stylesheets, layout first.
     --%>
-   <%--   --%>
+    <%-- Assuming you have a layout.css, if not, just login.css is fine --%>
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/header/style.css"> --%>
     <link rel="stylesheet" href="login.css">
+    
+    <style>
+        /* Add this for the loading spinner animation */
+        .loading-icon {
+            animation: fa-spin 1s infinite linear;
+        }
+        .hidden {
+            display: none;
+        }
+        .submit-btn:disabled {
+             opacity: 0.7;
+             cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <%-- The rest of your file remains the same --%>
@@ -45,6 +59,7 @@
                             <input id="login-password" name="password" type="password" autocomplete="current-password" required class="form-input" placeholder="Enter your password">
                             <div class="password-toggle">
                                 <i class="fa-solid fa-eye eye-icon"></i>
+                                <!-- ADDED: eye-off-icon for toggling -->
                                 <i class="fa-solid fa-eye-slash eye-off-icon hidden"></i>
                             </div>
                         </div>
@@ -55,9 +70,11 @@
                         <a href="${pageContext.request.contextPath}/resetpassword.jsp" class="link">Forgot password?</a>
                     </div>
                     <div class="button-group">
-                        <button type="submit" class="submit-btn">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            <span>Sign In</span> 
+                        <!-- MODIFIED: Added spinner and text spans -->
+                        <button type="submit" class="submit-btn" id="login-submit-btn">
+                            <i class="fa-solid fa-spinner loading-icon hidden"></i>
+                            <i class="fa-solid fa-right-to-bracket default-icon"></i>
+                            <span class="btn-text">Sign In</span> 
                         </button>
                     </div>
                 </form>
