@@ -152,30 +152,45 @@
 .button-group {
     padding-top: 0.5rem;
 }
+
+/* RECTIFIED:
+  - Merged the two .submit-btn definitions into one.
+  - Using var(--primary-blue) for consistency.
+*/
 .submit-btn {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    padding: 0.875rem;
+    padding: 0.9rem;
     border: none;
-    border-radius: 0.5rem;
-    background-color: var(--primary-blue);
+    border-radius: 8px;
+    background-color: var(--primary-blue, #3b82f6); /* Use variable, fallback to color */
     color: white;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
-}
-.submit-btn:hover {
-    background-color: var(--primary-blue-hover);
+    margin-top: 1rem;
+    /* Smooth transition for hover */
+	transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-/* Utility (Single definition) */
-.hidden {
-    display: none;
+.submit-btn:hover {
+    background-color: var(--primary-blue-hover, #2563eb);
+    /* Add a "lift" effect */
+	transform: translateY(-3px);
+	box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
 }
+
+.submit-btn:disabled {
+	background-color: var(--placeholder-color, #9ca3af);
+    opacity: 0.7;
+	cursor: not-allowed;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
 
 /*
   ==========================================================================
@@ -202,6 +217,7 @@
     transform: translateY(-20px);
     transition: all 0.5s ease;
 }
+
 
 /* Show the toast */
 #toast.show {

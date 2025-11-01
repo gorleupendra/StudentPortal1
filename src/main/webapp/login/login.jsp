@@ -58,9 +58,7 @@
                             <i class="fa-solid fa-lock input-icon"></i>
                             <input id="login-password" name="password" type="password" autocomplete="current-password" required class="form-input" placeholder="Enter your password">
                             <div class="password-toggle">
-                                <i class="fa-solid fa-eye eye-icon"></i>
-                                <!-- ADDED: eye-off-icon for toggling -->
-                                <i class="fa-solid fa-eye-slash eye-off-icon hidden"></i>
+                                <i class="fa-solid fa-eye-slash eye-off-icon" ></i>
                             </div>
                         </div>
                     </div>
@@ -70,11 +68,8 @@
                         <a href="${pageContext.request.contextPath}/resetpassword.jsp" class="link">Forgot password?</a>
                     </div>
                     <div class="button-group">
-                        <!-- MODIFIED: Added spinner and text spans -->
                         <button type="submit" class="submit-btn" id="login-submit-btn">
-                            <i class="fa-solid fa-spinner loading-icon hidden"></i>
-                            <i class="fa-solid fa-right-to-bracket default-icon"></i>
-                            <span class="btn-text">Sign In</span> 
+                            <i class="fa-solid fa-user-graduate default-icon"></i>Sign In 
                         </button>
                     </div>
                 </form>

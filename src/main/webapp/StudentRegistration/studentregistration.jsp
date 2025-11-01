@@ -22,8 +22,7 @@
 <%@include file="/header/header.jsp" %>
 	<main class="main-content">
 		<div class="form-container">
-			<h2 class="form-title">Student Registration Form
-				form</h2>
+			<h2 class="form-title">Student Registration Form</h2>
 			<div id="toast"></div>
 
 			<form action="${pageContext.request.contextPath}/studentRegistration" method="post" id="studentForm"
@@ -145,8 +144,7 @@
 						<div class="select-wrapper">
 							<select id="join-category" class="select-field" required
 								name="joincate">
-								<option value="" disabled selected>----Select
-									Category----</option>
+								<option value="" disabled selected>----Select Category----</option>
 								<option value="OC">OC</option>
 								<option value="BC">BC</option>
 								<option value="SC">SC</option>
@@ -157,7 +155,7 @@
 					<div class="input-group">
 						<label for="join-category">Joining Year</label>
 						<div class="select-wrapper">
-						<select id="join-category" class="dob-field" required name="joinyear" required>
+						<select id="join-category" class="select-field" name="joinyear" required>
 							<option value="" disabled selected>- - - - - year - - - - -</option>
 							<option value="2024" >2024</option>
 							<option value="2025" >2025</option>
