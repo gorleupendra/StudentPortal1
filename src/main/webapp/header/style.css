@@ -1,0 +1,275 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display.swap');
+/* /layout.css */
+
+/*
+  ==========================================================================
+  1. General Body, Theming & Variables
+  ==========================================================================
+*/
+:root {
+    --primary-blue: #3b82f6;
+    --primary-blue-hover: #2563eb;
+    --light-blue-bg: #f0f7ff; /* Fallback color */
+
+    /* Dark theme colors */
+    --text-dark: #1f2937;    /* Dark gray (bg) */
+    --text-medium: #4b5563;  /* Medium gray (link hover bg, border) */
+    --text-light: #9ca3af;   /* Light gray (text) */
+    --text-lightest: #f3f4f6; /* Off-white (title text) */
+
+    --border-color: #d1d5db;
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --footer-bg: #1a202c;
+    --footer-text: #a0aec0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+  Body & Main Layout
+*/
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-blue-bg);
+    background-image: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+/*
+  ==========================================================================
+  2. Header Styling (DARK THEME)
+  ==========================================================================
+*/
+.main-header {
+    width: 100%;
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    padding: 0 1.5rem;
+    border-bottom: 1px solid var(--text-medium);
+}
+
+.header-nav {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    gap: 1rem; /* Spacing between elements */
+    position: relative; /* Needed for absolute positioning of mobile menu */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+}
+
+.university-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-lightest);
+    /* Prevent shrinking too much */
+    min-width: 0;
+}
+
+/* Container for navigation links */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Space between main nav and auth nav */
+}
+
+/* Container for the "Home" style buttons */
+.header-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Style for the "Home", "About", "Contact" buttons (Desktop) */
+.header-button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 1px solid var(--text-medium); /* Subtle border from image */
+    background-color: transparent;
+    color: var(--text-light); /* Light text */
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; /* Prevents text wrap */
+}
+
+/* Hover effect for the new buttons */
+.header-button:hover {
+    background-color: var(--text-medium);
+    color: #ffffff;
+    border-color: var(--text-medium);
+}
+
+/* Style for the icons inside the buttons */
+.header-button i {
+    font-size: 0.875rem; /* Make icon slightly smaller than text */
+    width: 1em; /* Ensure icon takes up consistent space */
+    text-align: center;
+}
+
+/* Mobile Menu Toggle Button Styling */
+.mobile-menu-toggle {
+    display: none; /* Hidden by default on large screens */
+    background: none;
+    border: 1px solid var(--text-medium);
+    color: var(--text-lightest);
+    font-size: 1.5rem; /* Size of the hamburger icon */
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: var(--text-medium);
+}
+
+/*
+  ==========================================================================
+  3. Footer Styling (DARK THEME)
+  ==========================================================================
+*/
+.main-footer {
+    background-color: var(--footer-bg);
+    max-width:100%;
+    color: var(--footer-text);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    margin-top: auto; /* Push footer to bottom */
+}
+.footer-socials {
+    margin-bottom: 1rem;
+}
+.footer-socials a {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 0 0.75rem;
+    transition: color 0.2s ease-in-out;
+}
+.footer-socials a:hover {
+    color: #ffffff;
+}
+.footer-copyright {
+    font-size: 0.9rem;
+}
+
+/*
+  ==========================================================================
+  4. Layout Responsive Media Queries (Mobile Menu Logic)
+  ==========================================================================
+*/
+@media (max-width: 1000px) {
+    .header-nav {
+        /* Keep flex row for logo and burger button alignment */
+        flex-direction: row;
+        height: 70px; /* Keep fixed height */
+        padding: 0 1rem; /* Adjust padding */
+    }
+
+    /* Show the hamburger button */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    /* Hide the navigation links container by default */
+    /* Position it absolutely for overlay/dropdown effect */
+    .header-actions {
+        display: none;
+        position: absolute;
+        top: 70px; /* Position below header */
+        left: 0;
+        right: 0;
+        background-color: var(--text-dark); /* Same background as header */
+        border-top: 1px solid var(--text-medium);
+        padding: 0.5rem 0; /* Adjust padding for menu items */
+        z-index: 10; /* Ensure it's above other content */
+        /* Set flex direction for stacked items */
+        flex-direction: column;
+        align-items: stretch; /* Make items full-width */
+        gap: 0; /* Remove gap between items, use padding instead */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    }
+
+    /* Style rule to show the menu when .mobile-menu-open is added */
+    .header-nav.mobile-menu-open .header-actions {
+        display: flex;
+    }
+
+    /* Remove flex display from inner container */
+    .header-buttons {
+       display: block; /* Change from flex to block */
+       /* Remove gap as items are now block */
+       gap: 0;
+    }
+
+    /* --- NEW MENU ITEM STYLES --- */
+    /* Restyle the links to look like menu items */
+    .header-button {
+        display: flex; /* Keep flex for icon alignment */
+        width: 100%;
+        padding: 0.75rem 1.5rem; /* Menu item padding */
+        /* Remove desktop styles */
+        border: none;
+        border-radius: 0;
+        background-color: transparent; /* No background */
+        color: var(--text-lightest); /* Light text color */
+        text-align: left;
+        font-weight: 500;
+        border-bottom: 1px solid var(--text-medium); /* Separator line */
+    }
+
+    /* Remove bottom border from last item */
+     .header-buttons .header-button:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover/Focus effect for mobile menu items */
+    .header-button:hover,
+    .header-button:focus {
+        background-color: var(--text-medium); /* Darker background on hover */
+        color: #ffffff;
+    }
+    /* --- END NEW MENU ITEM STYLES --- */
+
+    .university-name {
+        font-size: 1.1rem;
+    }
+
+    .main-content {
+        padding: 2rem 0.5rem;
+    }
+}
+
+

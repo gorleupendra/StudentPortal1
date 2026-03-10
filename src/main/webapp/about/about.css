@@ -1,0 +1,200 @@
+/* /about.css */
+
+/*
+  Main About Page Content Container
+  (Uses variables from /header/style.css)
+*/
+.about-container {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 900px; /* Wider than login card for content */
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+}
+
+/*
+  Headings & Text
+*/
+
+/* NEW: Program Header */
+.program-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--light-blue-bg);
+}
+
+.program-header i {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+.program-header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.program-header p {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+/* Generic h1 style (in case it's needed, but program-header h1 is primary) */
+.about-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.about-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-medium);
+    margin-bottom: 1.25rem;
+}
+
+.about-container h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    /* NEW: Icon alignment */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    /* MODIFIED: Border style */
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 0.5rem;
+}
+
+.about-container h2 i {
+    color: var(--primary-blue);
+}
+
+/*
+  NEW: List Styling
+*/
+.program-details {
+    list-style: none;
+    padding-left: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.program-details li {
+    position: relative;
+    padding-left: 1.75rem; /* Space for icon */
+    margin-bottom: 0.75rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+/* List with checkmarks */
+.check-list li::before {
+    content: '\f00c'; /* Font Awesome check */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--success-color);
+    font-size: 0.85rem;
+}
+
+/* Simple list (for 'About the Programme') */
+.program-details:not(.check-list):not(.grid-list) li::before {
+    content: '\f105'; /* Font Awesome angle-right */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--primary-blue);
+    font-size: 1rem;
+}
+
+/* Grid list for key areas/careers */
+.grid-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1.5rem;
+}
+
+.grid-list li::before {
+    content: '\f0c8'; /* Font Awesome square-minus (fa-square) */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 400; /* Regular weight */
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--text-medium);
+    font-size: 0.75rem;
+}
+
+/*
+  NEW: Photo Gallery Styling
+*/
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.photo-gallery img {
+    width: 100%;
+    height: 250px; /* Gives all images a uniform height */
+    object-fit: cover; /* Prevents stretching */
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background-color: var(--light-blue-bg);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.photo-gallery img:hover {
+    transform: scale(1.03); /* Slight zoom on hover */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+
+/*
+  Responsive for Mobile
+*/
+@media (max-width: 768px) {
+    .about-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .program-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .about-container h2 {
+        font-size: 1.25rem;
+    }
+
+    /* NEW: Single column on mobile for grid list */
+    .grid-list {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    /* NEW: Photo gallery stacks to 1 column */
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-gallery img {
+        height: 200px; /* Adjust height for mobile */
+    }
+}
+
