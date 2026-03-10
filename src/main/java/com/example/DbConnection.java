@@ -29,7 +29,7 @@ public class DbConnection {
             config.setMinimumIdle(0);          // Allow the pool to go down to ZERO connections.
             config.setMaximumPoolSize(5);      // Don't open too many doors at once.
             config.setMaxLifetime(1800000);    // 30 minutes
-            config.setConnectionTimeout(30000);// Wait 30s (Neon takes a moment to "Wake up")
+            config.setConnectionTimeout(30000);// Waits 30s (Neon takes a moment to "Wake up")
             
             dataSource = new HikariDataSource(config);
             System.out.println("[DB-POOL] Connection Pool initialized successfully.");
