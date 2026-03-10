@@ -1,44 +1,54 @@
 package com.example;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbConnection {
-    public static Connection getConne() {
-        Connection con = null;
+    private static HikariDataSource dataSource;
+
+    static {
         try {
-            // Load the PostgreSQL driver
-            Class.forName("org.postgresql.Driver");
+            HikariConfig config = new HikariConfig();
+            
+            // 1. Get credentials from your environment
+            String host = System.getenv("RENDER_DB_HOST");
+            String pass = System.getenv("RENDER_DB_PASSWORD");
+            String dbName = "neondb";
+            String user = "neondb_owner";
 
-            // --- Hardcoded Render Connection Details (FOR TESTING ONLY) ---
-            String host =System.getenv("RENDER-DB-HOST"); // Render Internal Hostname
-            String dbName = "neondb";     // Render DB Name
-            String user = "neondb_owner";             // Render DB User
-            String pass =System.getenv("RENDER_DB_PASSWORD"); // Render DB Password (REMOVE BEFORE COMMIT/DEPLOY)
+            // 2. Configure the Pool
+            config.setJdbcUrl("jdbc:postgresql://" + host + ":5432/" + dbName + "?sslmode=require");
+            config.setUsername(user);
+            config.setPassword(pass);
+            config.setDriverClassName("org.postgresql.Driver");
 
-            // --- Input Validation (Less critical with hardcoded values, but good practice) ---
-            // (Removed checks for null/empty as they are hardcoded now)
+            // 3. Pool Settings (Optimization)
+            config.setIdleTimeout(30000);      // If a connection is idle for 1 minute, close it.
+            config.setMinimumIdle(0);          // Allow the pool to go down to ZERO connections.
+            config.setMaximumPoolSize(5);      // Don't open too many doors at once.
+            config.setMaxLifetime(1800000);    // 30 minutes
+            config.setConnectionTimeout(30000);// Wait 30s (Neon takes a moment to "Wake up")
+            
+            dataSource = new HikariDataSource(config);
+            System.out.println("[DB-POOL] Connection Pool initialized successfully.");
 
-            // --- Construct the JDBC URL ---
-            // NOTE: Render internal connections might NOT require SSL.
-            // If you get SSL errors, try removing "?sslmode=require" when running ON Render.
-            // External connections (like from your local machine) DO require SSL.
-            String url = "jdbc:postgresql://" + host + ":5432/" + dbName + "?sslmode=require";
-            // Establish the connection
-            con = DriverManager.getConnection(url, user, pass);
-
-        } catch (ClassNotFoundException e) {
-            System.err.println("Database connection failed: PostgreSQL Driver not found.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.err.println("Database connection failed: SQL Exception.");
-            e.printStackTrace(); // This will show details like "Connection refused", "Authentication failed", "SSL required" etc.
-        } catch (Exception e) { // Catch any other unexpected errors
-            System.err.println("Database connection failed: An unexpected error occurred.");
+        } catch (Exception e) {
+            System.err.println("[DB-POOL] Critical Error: Could not initialize HikariCP!");
             e.printStackTrace();
         }
-        if(con==null) {System.err.println("Connection object is null after attempting connection.");} // Changed to System.err
-        return con;
     }
+
+    /**
+     * Borrows a connection from the pool.
+     */
+    public static Connection getConne() throws SQLException {
+        if (dataSource == null) {
+            throw new SQLException("DataSource is null. Pool failed to initialize.");
+        }
+        return dataSource.getConnection();
+    }
+
+    private DbConnection() {} // Prevent instantiation
 }
